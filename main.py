@@ -14,12 +14,14 @@ def csv_to_json(file_path):
         with open(file_path, mode='r', encoding='utf-8-sig') as csv_file:
             # DictReader uses the first row as dictionary keys
             csv_reader = csv.DictReader(csv_file)
-
+            count = 0
             for row in csv_reader:
+                count+=1
                 # convert the dictionary row into a JSON string
                 json_output = json.dumps(row, indent=4)
                 print(json_output)
                 print("-" * 20)
+            print(f"\nTotal JSON objects prepared - {count}")
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -62,5 +64,5 @@ def json_to_csv(json_file_path, csv_output_path):
 if __name__ == "__main__":
     # Replace 'your_data.csv' with your actual local filename
     load_dotenv()
-    path_to_csv = os.getenv("FILEPATH")
+    path_to_csv = os.getenv("FIFTH_FILEPATH")
     csv_to_json(path_to_csv)

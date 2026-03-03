@@ -26,6 +26,29 @@ def csv_to_json(file_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
+# converts the entire list of objects to a single JSON
+def list_csv_to_json(file_path):
+    if not os.path.exists(file_path):
+        print(f"Error: The file '{file_path}' was not found.")
+        return
+
+    data_list = []
+
+    try:
+        with open(file_path, mode='r', encoding='utf-8-sig') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+
+            for row in csv_reader:
+                data_list.append(row)
+
+            json_output = json.dumps(data_list, indent=4)
+            print(json_output)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
 # json to csv conversion
 def json_to_csv(json_file_path, csv_output_path):
     # check if the file exists before attempting to open it
@@ -65,4 +88,4 @@ if __name__ == "__main__":
     # Replace 'your_data.csv' with your actual local filename
     load_dotenv()
     path_to_csv = os.getenv("FIFTH_FILEPATH")
-    csv_to_json(path_to_csv)
+    list_csv_to_json(path_to_csv)
